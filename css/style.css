@@ -1,0 +1,183 @@
+/* ============================================================
+   ROOMCRAFT 3D — design tokens
+   A studio/tool aesthetic: charcoal canvas, warm paper panels,
+   brass accent. Space Grotesk for structure, Inter for reading.
+   ============================================================ */
+:root{
+  --ink:      #201E1C;
+  --paper:    #FBF9F5;
+  --panel:    #FFFFFF;
+  --line:     #E7E1D3;
+  --muted:    #7A7369;
+  --brass:    #B4823E;
+  --brass-dk: #8F6529;
+  --canvas-a: #2E2C29;
+  --canvas-b: #171615;
+  --good:     #33693F;
+  --bad:      #A23B2E;
+  --radius:   6px;
+}
+*{box-sizing:border-box;}
+html,body{height:100%;margin:0;}
+body{
+  font-family:"Inter",Arial,sans-serif;
+  color:var(--ink);
+  background:var(--paper);
+  font-size:14px;
+}
+h1,h2,h3,h4{
+  font-family:"Space Grotesk", "Inter", sans-serif;
+  font-weight:600;
+  margin:0;
+  letter-spacing:-0.01em;
+}
+button{font-family:inherit;cursor:pointer;}
+input,select{font-family:inherit;}
+a{color:var(--brass-dk);}
+
+/* ---------- app shell ---------- */
+.app-shell{display:flex;flex-direction:column;height:100vh;}
+.topbar{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:10px 18px;background:var(--ink);color:#F2ECDD;flex-shrink:0;
+}
+.topbar .brand{display:flex;align-items:center;gap:10px;}
+.topbar .brand .mark{font-size:1.15rem;font-family:"Space Grotesk",sans-serif;font-weight:700;}
+.topbar .brand .mark span{color:var(--brass);}
+.topbar .actions{display:flex;gap:8px;align-items:center;}
+.topbar .actions a, .topbar .actions button{
+  background:transparent;border:1px solid #4A473F;color:#E8E1CE;
+  padding:6px 12px;border-radius:20px;font-size:.8rem;text-decoration:none;
+}
+.topbar .actions a:hover, .topbar .actions button:hover{border-color:var(--brass);color:var(--brass);}
+.topbar .actions .primary{background:var(--brass);border-color:var(--brass);color:#201E1C;font-weight:600;}
+.topbar .actions .primary:hover{background:#C79552;color:#201E1C;}
+
+.main-grid{display:flex;flex:1;min-height:0;}
+
+/* ---------- left: catalog ---------- */
+.catalog-panel{
+  width:270px;flex-shrink:0;background:var(--panel);border-right:1px solid var(--line);
+  display:flex;flex-direction:column;min-height:0;
+}
+.cat-tabs{display:flex;flex-wrap:wrap;gap:4px;padding:12px;border-bottom:1px solid var(--line);}
+.cat-tab{
+  border:1px solid var(--line);background:var(--paper);padding:5px 10px;border-radius:14px;
+  font-size:.74rem;color:var(--muted);
+}
+.cat-tab.active{background:var(--ink);color:#F2ECDD;border-color:var(--ink);}
+.catalog-list{flex:1;overflow-y:auto;padding:10px;}
+.catalog-item{
+  border:1px solid var(--line);border-radius:var(--radius);padding:10px;margin-bottom:8px;
+  display:flex;gap:10px;align-items:center;background:var(--paper);
+}
+.catalog-item .swatch{
+  width:40px;height:40px;border-radius:4px;flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;font-size:1.1rem;
+}
+.catalog-item .info{flex:1;min-width:0;}
+.catalog-item .info strong{display:block;font-size:.85rem;}
+.catalog-item .info span{font-size:.72rem;color:var(--muted);}
+.catalog-item button{
+  background:var(--ink);color:#F2ECDD;border:none;border-radius:14px;
+  padding:5px 10px;font-size:.72rem;flex-shrink:0;
+}
+.catalog-item button:hover{background:var(--brass-dk);}
+
+/* ---------- center: 3D canvas ---------- */
+.viewport{
+  flex:1;position:relative;min-width:0;
+  background:linear-gradient(160deg,var(--canvas-a),var(--canvas-b));
+}
+.viewport canvas{display:block;width:100%;height:100%;}
+.viewport-hint{
+  position:absolute;bottom:14px;left:14px;color:#CFC7B2;font-size:.72rem;
+  background:rgba(0,0,0,.35);padding:6px 10px;border-radius:16px;max-width:340px;
+}
+.viewport-empty{
+  position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+  color:#CFC7B2;font-size:.95rem;text-align:center;padding:20px;
+}
+
+/* ---------- right: properties ---------- */
+.props-panel{
+  width:300px;flex-shrink:0;background:var(--panel);border-left:1px solid var(--line);
+  overflow-y:auto;padding:16px;
+}
+.props-panel h3{font-size:.8rem;letter-spacing:.05em;color:var(--muted);text-transform:uppercase;margin-bottom:10px;}
+.field-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px;}
+.field{margin-bottom:10px;}
+.field label{display:block;font-size:.76rem;color:var(--muted);margin-bottom:4px;}
+.field input, .field select{
+  width:100%;padding:7px 9px;border:1px solid var(--line);border-radius:4px;background:var(--paper);
+}
+.btn{
+  display:inline-block;background:var(--ink);color:#F2ECDD;border:none;padding:9px 14px;
+  border-radius:20px;font-size:.82rem;font-weight:600;
+}
+.btn:hover{background:#3A362F;}
+.btn.brass{background:var(--brass);color:#201E1C;}
+.btn.brass:hover{background:#C79552;}
+.btn.outline{background:transparent;border:1px solid var(--ink);color:var(--ink);}
+.btn.outline:hover{background:var(--ink);color:#fff;}
+.btn.danger{background:transparent;border:1px solid var(--bad);color:var(--bad);}
+.btn.danger:hover{background:var(--bad);color:#fff;}
+.btn.block{width:100%;text-align:center;}
+.btn.small{padding:5px 10px;font-size:.72rem;}
+
+hr.sep{border:none;border-top:1px solid var(--line);margin:16px 0;}
+
+.selected-card{border:1px solid var(--line);border-radius:var(--radius);padding:12px;background:var(--paper);}
+.selected-card .name{font-family:"Space Grotesk",sans-serif;font-weight:600;margin-bottom:8px;}
+.room-item-row{
+  display:flex;justify-content:space-between;align-items:center;padding:7px 4px;
+  border-bottom:1px solid var(--line);font-size:.82rem;
+}
+.room-item-row button{background:none;border:none;color:var(--bad);font-size:.72rem;text-decoration:underline;}
+.room-item-row .rname{cursor:pointer;}
+.room-item-row .rname:hover{color:var(--brass-dk);}
+.empty-note{color:var(--muted);font-size:.8rem;padding:10px 0;}
+
+.slider-row{display:flex;align-items:center;gap:8px;}
+.slider-row input[type=range]{flex:1;}
+.slider-row span{width:44px;text-align:right;font-size:.78rem;color:var(--muted);}
+
+.color-swatches{display:flex;gap:6px;flex-wrap:wrap;margin-top:4px;}
+.color-dot{width:22px;height:22px;border-radius:50%;border:2px solid transparent;cursor:pointer;}
+.color-dot.active{border-color:var(--ink);}
+
+/* ---------- admin page ---------- */
+.admin-shell{max-width:980px;margin:0 auto;padding:26px 20px 60px;}
+.admin-shell h1{font-size:1.6rem;margin-bottom:6px;}
+.admin-shell .lede{color:var(--muted);margin-bottom:22px;font-size:.9rem;}
+.admin-card{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:20px;margin-bottom:22px;}
+.admin-table{width:100%;border-collapse:collapse;}
+.admin-table th{text-align:left;font-size:.72rem;color:var(--muted);border-bottom:2px solid var(--ink);padding:8px 6px;}
+.admin-table td{padding:8px 6px;border-bottom:1px solid var(--line);vertical-align:middle;}
+.admin-table input, .admin-table select{padding:5px 7px;border:1px solid var(--line);border-radius:4px;width:100%;}
+.admin-swatch{width:26px;height:26px;border-radius:4px;display:inline-block;vertical-align:middle;}
+.form-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;align-items:end;}
+.form-grid .field label{font-size:.72rem;}
+.tag{display:inline-block;background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:2px 9px;font-size:.7rem;color:var(--muted);}
+
+/* ---------- topbar account pill ---------- */
+.user-pill{font-size:.76rem;color:#CFC7B2;padding:0 2px;white-space:nowrap;}
+
+/* ---------- login page ---------- */
+.login-shell{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px;}
+.login-card{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:34px 30px;max-width:380px;width:100%;}
+.login-card h1{font-size:1.4rem;margin-bottom:6px;text-align:center;}
+.login-card .lede{color:var(--muted);font-size:.85rem;margin-bottom:22px;text-align:center;}
+.login-card .field{margin-bottom:14px;}
+.login-error{background:#FBEAE7;border:1px solid var(--bad);color:var(--bad);border-radius:6px;padding:8px 10px;font-size:.8rem;margin-bottom:12px;}
+.login-hint{margin-top:18px;font-size:.78rem;color:var(--muted);line-height:1.5;text-align:center;}
+
+@media (max-width:1000px){
+  .catalog-panel{width:220px;}
+  .props-panel{width:250px;}
+}
+@media (max-width:800px){
+  .main-grid{flex-direction:column;}
+  .catalog-panel, .props-panel{width:100%;max-height:220px;}
+  .viewport{min-height:320px;}
+}
