@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Log in — RoomCraft 3D</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body style="background:var(--paper);">
+
+<div class="login-shell">
+  <div class="login-card">
+    <div class="brand" style="justify-content:center;margin-bottom:18px;">
+      <span class="mark">RoomCraft<span>3D</span></span>
+    </div>
+    <h1>Log in</h1>
+    <p class="lede">Sign in to start designing rooms.</p>
+
+    <div class="field">
+      <label>Username</label>
+      <input type="text" id="login-username" autocomplete="username" placeholder="e.g. admin">
+    </div>
+    <div class="field">
+      <label>Password</label>
+      <input type="password" id="login-password" autocomplete="current-password" placeholder="••••••••">
+    </div>
+    <div id="login-error" class="login-error" style="display:none;"></div>
+    <button class="btn brass block" id="login-btn">Log in</button>
+
+    <p class="login-hint" id="first-run-hint" style="display:none;">
+      First time here? Default admin login is <strong>admin / admin123</strong>.
+      Please change that password from the Admin page once you're in.
+    </p>
+  </div>
+</div>
+
+<script src="js/auth.js"></script>
+<script>
+(function(){
+  // If the seeded default admin account hasn't been touched yet, show a hint so nobody gets locked out.
+  const users = getUsers();
+  const defaultAdminStillIntact = users.length === 1 && users[0].username === "admin" && users[0].password === "admin123";
+  if(defaultAdminStillIntact) document.getElementById("first-run-hint").style.display = "block";
+
+  if(isLoggedIn()){
+    window.location.href = "index.html";
+  }
+
+  function doLogin(){
+    const u = document.getElementById("login-username").value.trim();
+    const p = document.getElementById("login-password").value;
+    const errEl = document.getElementById("login-error");
+    errEl.style.display = "none";
+    if(!u || !p){
+      errEl.textContent = "Enter both a username and password.";
+      errEl.style.display = "block";
+      return;
+    }
+    const user = login(u, p);
+    if(!user){
+      errEl.textContent = "Incorrect username or password.";
+      errEl.style.display = "block";
+      return;
+    }
+    window.location.href = "index.html";
+  }
+
+  document.getElementById("login-btn").addEventListener("click", doLogin);
+  ["login-username","login-password"].forEach(id=>{
+    document.getElementById(id).addEventListener("keydown", e=>{ if(e.key === "Enter") doLogin(); });
+  });
+})();
+</script>
+</body>
+</html>

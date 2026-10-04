@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RoomCraft 3D — Interior Designer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<script src="js/auth.js"></script>
+<script>requireLogin();</script>
+</head>
+<body>
+
+<div class="app-shell">
+
+  <header class="topbar">
+    <div class="brand">
+      <span class="mark">RoomCraft<span>3D</span></span>
+    </div>
+    <div class="actions">
+      <button id="save-design-btn">Save design</button>
+      <button id="load-design-btn">Load design</button>
+      <button id="reset-room-btn">Reset room</button>
+      <button id="download-img-btn">Download image</button>
+      <a href="admin.html" id="admin-link">Admin ↗</a>
+      <span class="user-pill" id="user-pill"></span>
+      <button id="logout-btn">Log out</button>
+    </div>
+  </header>
+
+  <div class="main-grid">
+
+    <!-- LEFT: catalog -->
+    <aside class="catalog-panel">
+      <div class="cat-tabs" id="cat-tabs"></div>
+      <div class="catalog-list" id="catalog-list"></div>
+    </aside>
+
+    <!-- CENTER: 3D viewport -->
+    <section class="viewport" id="viewport">
+      <canvas id="three-canvas"></canvas>
+      <div class="viewport-hint">Drag empty space to orbit · scroll to zoom · click an item then drag to move it · doors, windows and lofts slide along the walls</div>
+    </section>
+
+    <!-- RIGHT: room + properties -->
+    <aside class="props-panel">
+      <h3>Room dimensions (feet)</h3>
+      <div class="field-row">
+        <div class="field"><label>Width</label><input type="number" id="room-width" value="12" min="4" max="60" step="0.5"></div>
+        <div class="field"><label>Breadth</label><input type="number" id="room-depth" value="10" min="4" max="60" step="0.5"></div>
+      </div>
+      <div class="field"><label>Height</label><input type="number" id="room-height" value="9" min="6" max="20" step="0.5"></div>
+      <button class="btn brass block" id="build-room-btn">Build / resize room</button>
+
+      <hr class="sep">
+
+      <h3>Selected item</h3>
+      <div id="no-selection" class="empty-note">Click an item in the room to edit it, or add one from the left panel.</div>
+      <div id="selection-panel" class="selected-card" style="display:none;">
+        <div class="name" id="sel-name"></div>
+
+        <div class="field-row">
+          <div class="field"><label>Width (ft)</label><input type="number" id="sel-w" step="0.1" min="0.2"></div>
+          <div class="field"><label>Depth (ft)</label><input type="number" id="sel-d" step="0.1" min="0.2"></div>
+        </div>
+        <div class="field"><label>Height (ft)</label><input type="number" id="sel-h" step="0.1" min="0.2"></div>
+
+        <div class="field">
+          <label>Colour</label>
+          <div class="color-swatches" id="sel-colors"></div>
+        </div>
+
+        <div class="field" id="sel-elev-field" style="display:none;">
+          <label>Height from floor (ft)</label>
+          <input type="number" id="sel-e" step="0.1" min="0">
+        </div>
+        <div class="empty-note" id="sel-wall-hint" style="display:none;margin-bottom:8px;">Fixed to a wall — drag it along the wall, or onto another wall.</div>
+
+        <div class="field" id="sel-rotate-field">
+          <label>Rotate</label>
+          <div style="display:flex;gap:8px;">
+            <button class="btn small outline" id="rotate-left">⟲ 15°</button>
+            <button class="btn small outline" id="rotate-right">15° ⟳</button>
+          </div>
+        </div>
+
+        <button class="btn danger block" id="remove-item-btn" style="margin-top:6px;">Remove from room</button>
+      </div>
+
+      <hr class="sep">
+
+      <h3>Items in room</h3>
+      <div id="room-items-list"></div>
+    </aside>
+
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="js/catalog.js"></script>
+<script src="js/scene3d.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>
